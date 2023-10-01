@@ -1,5 +1,4 @@
 ﻿using CreateJWT.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,7 +11,7 @@ namespace CreateJWT.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
+        private static readonly User user = new();
         private readonly IConfiguration _configuration;
 
         public AuthController(IConfiguration configuration)
@@ -44,9 +43,18 @@ namespace CreateJWT.Controllers
             }
 
             var token = CreateToken(user);
+            HttpContext.Session.SetString("JwtToken", token);
 
             return Ok(token);
         }
+
+        /*      
+        [HttpGet]
+        public ActionResult<String> GetCurrentSessionToken()
+        {
+            var token = HttpContext.Session.GetString("JwtToken");
+            return Ok(token);
+        }*/
 
         private string CreateToken(User user)
         {
