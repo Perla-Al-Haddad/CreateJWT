@@ -62,7 +62,7 @@ namespace CreateJWT.Controllers
 
             var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == request.Username);
 
-            if (user == null || user.Username != request.Username)
+            if (user == null)
             {
                 return NotFound();
             }
