@@ -22,6 +22,7 @@ namespace CreateJWT.Controllers
             _dbContext = dbContext;
         }
 
+        [Produces("application/xml")]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserDto request)
         {
@@ -52,6 +53,7 @@ namespace CreateJWT.Controllers
             }
         }
 
+        [Produces("application/xml")]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserDto request)
         {

@@ -20,6 +20,7 @@ namespace CreateJWT.Controllers
         }
 
         [Authorize]
+        [Produces("application/xml")]
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
